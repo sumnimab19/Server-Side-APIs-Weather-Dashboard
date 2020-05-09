@@ -57,6 +57,8 @@ body {
 
 .weatherIcon {
     vertical-align: middle ;
+    background-color: deepskyblue;
+    border-radius: 30%;
 }
 
 /* UV Index color based on classes assigned */
