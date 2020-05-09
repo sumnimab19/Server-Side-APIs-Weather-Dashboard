@@ -37,8 +37,8 @@ body {
     margin-top: 20px;
 
 }
-
-.eachDay{
+/*  var dayArray = ["dayOne","dayTwo","dayThree","dayFour","dayFive"]; */
+.dayOne,.dayTwo,.dayThree,.dayFour,.dayFive {
     border-radius: 3%;
     border: blue;
     background-color: rgb(11, 102, 207);
