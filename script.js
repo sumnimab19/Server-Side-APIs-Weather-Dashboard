@@ -1,11 +1,11 @@
+
 var cityName = $("#citySearch");
 var searchBtn = $(".searchBtn");
 var storedValues = [];
 var APIKey = "644e2fd49d4e3e04ae6b482ca8428be6";
 
 searchBtn.on("click", getData);
-// var lat;
-// var lon;
+
 
 getValueFromLocalStorage()
 
@@ -15,12 +15,9 @@ function getData(){
     var latitude = 32.22
     var longitude = -110.93
 
-  // var APIKey = "644e2fd49d4e3e04ae6b482ca8428be6";
   var searchedCity = $("#citySearch").val().trim();
   var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + searchedCity + "&appid=" + APIKey;
-  //var queryURLForecast = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchedCity + "&appid=" + APIKey;
   var queryURLForecast = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=hourly&appid=" + APIKey;
-
 
   $.ajax({
     url: queryURL,
@@ -30,18 +27,11 @@ function getData(){
   console.log(response);
 
       latValue = response.coord.lat;
-     
       lonValue = response.coord.lon;
       
-
       var timeStamp = response.dt;
-
-     // JSON timestamp
-   console.log(timeStamp)
-    
-   
     // Convert timestamp to milliseconds
-    var date = new Date(timeStamp*1000);
+      var date = new Date(timeStamp*1000);
   
     // Months array
 var months_arr = ['1','2','3','4','5','6','7','8','9','10','11','12'];
@@ -54,11 +44,8 @@ var months_arr = ['1','2','3','4','5','6','7','8','9','10','11','12'];
   // Day
   var day = date.getDate();
 
- 
   // Display date time in MM-dd-yyyy h:m:s format
   var convertedDate = month+'/'+day+'/'+year;
-
-
 
       $(".city").html(response.name + "  (" + convertedDate + ")");
       $(".city").css("font-weight","Bold");
@@ -78,9 +65,7 @@ var months_arr = ['1','2','3','4','5','6','7','8','9','10','11','12'];
       var tempF = (response.main.temp - 273.15) * 1.80 + 32;
   
       // add temp content to html
-      $(".temp").text("Temparature: " + tempF.toFixed(2) + " °F");
-  
-   
+      $(".temp").text("Temparature: " + tempF.toFixed(2) + "°F");
   })
   
 
@@ -91,76 +76,66 @@ var months_arr = ['1','2','3','4','5','6','7','8','9','10','11','12'];
     }).then(function(response) {
       console.log(response)
       var divRow = $(".forecastRow");
-      console.log(response.daily.length)
 
       var dayArray = ["dayOne","dayTwo","dayThree","dayFour","dayFive"];
       var dateForecastArray = ["dateForecastOne","dateForecastTwo","dateForecastThree","dateForecastFour","dateForecastFive"];
       var weatherIconForecastArray = ["weatherIconForecastOne","weatherIconForecastTwo","weatherIconForecastThree","weatherIconForecastFour","weatherIconForecastFive"];
       var tempForecastArray = ["tempForecastOne","tempForecastTwo","tempForecastThree", "tempForecastFour","tempForecastFive"];
       var humidityForecastArray = ["humidityForecastOne","humidityForecastTwo","humidityForecastThree","humidityForecastFour","humidityForecastFive"];
+    
 
-      for (var i = 0; i < 5; i++) {
+     
+      if ($('.dateForecastOne').length > 0){
+        return; 
+      } else {
+        for (var i = 0; i < 5; i++) {
 
-        // <article class="col-2 forecastDays">
-        var forecastArticle = $("<article>");
-        forecastArticle.addClass("col-2 forecastDays");
-        divRow.append(forecastArticle);
-        //                     <div class="eachDay">
-        var eachDayDiv = $("<div>");
-        eachDayDiv.addClass(dayArray[i]);
-        forecastArticle.append(eachDayDiv);
-        //                         <h5 class="dateForecast"></h5>
-        var dateForecast = $("<h5>");
-        dateForecast.addClass(dateForecastArray[i]);
-        eachDayDiv.append(dateForecast);
-
-        var timeStamp = (response.daily[i].dt);
-        var date = new Date(timeStamp*1000);
-        var months_arr = ['1','2','3','4','5','6','7','8','9','10','11','12'];
-        var year = date.getFullYear();
-        var month = months_arr[date.getMonth()];
-        var day = date.getDate();
-        var convertedDate = month+'/'+day+'/'+year;
-        $("." + dateForecastArray[i]).text(convertedDate);
-
-        //                         <img class="weatherIconForecast">
-        var weatherIconForecast = $("<img>");
-        weatherIconForecast.addClass(weatherIconForecastArray[i]);
-        eachDayDiv.append(weatherIconForecast);
-
-        var iconNum = response.daily[i].weather[0].icon;
-        var forecastURL = "http://openweathermap.org/img/wn/" + iconNum + "@2x.png";
-        $("." + weatherIconForecastArray[i]).attr("src",forecastURL);
-        $("." + weatherIconForecastArray[i]).width(50); 
-        $("." + weatherIconForecastArray[i]).height(50);
-
-
-        // //                         <p class="tempForecast"></p>
-        var tempForecast = $("<p>");
-        tempForecast.addClass(tempForecastArray[i]);
-        eachDayDiv.append(tempForecast);
-
-        var tempF = (response.daily[i].temp.day - 273.15) * 1.80 + 32;
-        $("." + tempForecastArray[i]).text("Temp: " + tempF.toFixed(2) + " °F");
-        console.log(tempF)
-
-
-        // //                         <p class="humidityForecast"></p>
-        var humidityForecast = $("<p>");
-        humidityForecast.addClass(humidityForecastArray[i]);
-        eachDayDiv.append(humidityForecast);
-        //                     </div>
-        //                 </article>
-        
-      //}
-        
-
-        
+          var forecastArticle = $("<article>");
+          forecastArticle.addClass("col-2 forecastDays");
+          divRow.append(forecastArticle);
   
-        $("." + humidityForecastArray[i]).text("Humidity: " + response.daily[i].humidity + "%");
-      
-        
+          var eachDayDiv = $("<div>");
+          eachDayDiv.addClass(dayArray[i]);
+          forecastArticle.append(eachDayDiv);
+  
+          var dateForecast = $("<h5>");
+          dateForecast.addClass(dateForecastArray[i]);
+          eachDayDiv.append(dateForecast);
+  
+          var timeStamp = (response.daily[i].dt);
+          var date = new Date(timeStamp*1000);
+          var months_arr = ['1','2','3','4','5','6','7','8','9','10','11','12'];
+          var year = date.getFullYear();
+          var month = months_arr[date.getMonth()];
+          var day = date.getDate();
+          var convertedDate = month+'/'+day+'/'+year;
+          $("." + dateForecastArray[i]).text(convertedDate);
+  
+          var weatherIconForecast = $("<img>");
+          weatherIconForecast.addClass(weatherIconForecastArray[i]);
+          eachDayDiv.append(weatherIconForecast);
+  
+          var iconNum = response.daily[i].weather[0].icon;
+          var forecastURL = "http://openweathermap.org/img/wn/" + iconNum + "@2x.png";
+          $("." + weatherIconForecastArray[i]).attr("src",forecastURL);
+          $("." + weatherIconForecastArray[i]).width(50); 
+          $("." + weatherIconForecastArray[i]).height(50);
+  
+          var tempForecast = $("<p>");
+          tempForecast.addClass(tempForecastArray[i]);
+          eachDayDiv.append(tempForecast);
+  
+          var tempF = (response.daily[i].temp.day - 273.15) * 1.80 + 32;
+          $("." + tempForecastArray[i]).text("Temp: " + tempF.toFixed(2) + " °F");
+  
+          var humidityForecast = $("<p>");
+          humidityForecast.addClass(humidityForecastArray[i]);
+          eachDayDiv.append(humidityForecast);
+   
+          $("." + humidityForecastArray[i]).text("Humidity: " + response.daily[i].humidity + "%");  
+        }
       }
+      
     })
     
     getUVIndex();
