@@ -7,17 +7,13 @@ var APIKey = "644e2fd49d4e3e04ae6b482ca8428be6";
 searchBtn.on("click", getData);
 
 
-getValueFromLocalStorage()
+getValueFromLocalStorage();
 
 function getData(){  
   if(cityName !== null){
 
-    var latitude = 32.22
-    var longitude = -110.93
-
   var searchedCity = $("#citySearch").val().trim();
   var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + searchedCity + "&appid=" + APIKey;
-  var queryURLForecast = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=hourly&appid=" + APIKey;
 
   $.ajax({
     url: queryURL,
@@ -69,6 +65,18 @@ var months_arr = ['1','2','3','4','5','6','7','8','9','10','11','12'];
   })
   
 
+  $.ajax({
+    url: queryURL,
+    method: "GET" 
+  }).then(function(response) {
+    
+  console.log(response);
+
+      latitude = response.coord.lat;
+      longitude = response.coord.lon;
+
+  var queryURLForecast = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=hourly&appid=" + APIKey;
+
   
   $.ajax({
       url: queryURLForecast,
@@ -84,23 +92,22 @@ var months_arr = ['1','2','3','4','5','6','7','8','9','10','11','12'];
       var humidityForecastArray = ["humidityForecastOne","humidityForecastTwo","humidityForecastThree","humidityForecastFour","humidityForecastFive"];
     
 
-     
-      if ($('.dateForecastOne').length > 0){
-        return; 
-      } else {
+      // if ($('.dateForecastOne').length > 0){
+      //   return; 
+      // } else {
         for (var i = 0; i < 5; i++) {
 
-          var forecastArticle = $("<article>");
-          forecastArticle.addClass("col-2 forecastDays");
-          divRow.append(forecastArticle);
+          // var forecastArticle = $("<article>");
+          // forecastArticle.addClass("col-2 forecastDays");
+          // divRow.append(forecastArticle);
   
-          var eachDayDiv = $("<div>");
-          eachDayDiv.addClass(dayArray[i]);
-          forecastArticle.append(eachDayDiv);
+          // var eachDayDiv = $("<div>");
+          // eachDayDiv.addClass(dayArray[i]);
+          // forecastArticle.append(eachDayDiv);
   
-          var dateForecast = $("<h5>");
-          dateForecast.addClass(dateForecastArray[i]);
-          eachDayDiv.append(dateForecast);
+          // var dateForecast = $("<h5>");
+          // dateForecast.addClass(dateForecastArray[i]);
+          // eachDayDiv.append(dateForecast);
   
           var timeStamp = (response.daily[i].dt);
           var date = new Date(timeStamp*1000);
@@ -111,9 +118,9 @@ var months_arr = ['1','2','3','4','5','6','7','8','9','10','11','12'];
           var convertedDate = month+'/'+day+'/'+year;
           $("." + dateForecastArray[i]).text(convertedDate);
   
-          var weatherIconForecast = $("<img>");
-          weatherIconForecast.addClass(weatherIconForecastArray[i]);
-          eachDayDiv.append(weatherIconForecast);
+          // var weatherIconForecast = $("<img>");
+          // weatherIconForecast.addClass(weatherIconForecastArray[i]);
+          // eachDayDiv.append(weatherIconForecast);
   
           var iconNum = response.daily[i].weather[0].icon;
           var forecastURL = "http://openweathermap.org/img/wn/" + iconNum + "@2x.png";
@@ -121,30 +128,30 @@ var months_arr = ['1','2','3','4','5','6','7','8','9','10','11','12'];
           $("." + weatherIconForecastArray[i]).width(50); 
           $("." + weatherIconForecastArray[i]).height(50);
   
-          var tempForecast = $("<p>");
-          tempForecast.addClass(tempForecastArray[i]);
-          eachDayDiv.append(tempForecast);
+          // var tempForecast = $("<p>");
+          // tempForecast.addClass(tempForecastArray[i]);
+          // eachDayDiv.append(tempForecast);
   
           var tempF = (response.daily[i].temp.day - 273.15) * 1.80 + 32;
           $("." + tempForecastArray[i]).text("Temp: " + tempF.toFixed(2) + " °F");
   
-          var humidityForecast = $("<p>");
-          humidityForecast.addClass(humidityForecastArray[i]);
-          eachDayDiv.append(humidityForecast);
+          // var humidityForecast = $("<p>");
+          // humidityForecast.addClass(humidityForecastArray[i]);
+          // eachDayDiv.append(humidityForecast);
    
           $("." + humidityForecastArray[i]).text("Humidity: " + response.daily[i].humidity + "%");  
-        }
+        // }
       }
-      
+    })
     })
     
     getUVIndex();
 
     
-   // storeValuesToLocalStorage();
-   // addStoredValue();
-   // getValueFromLocalStorage();
-    cityName.val("");
+   //storeValuesToLocalStorage();
+   addStoredValue();
+   getValueFromLocalStorage();
+   
 
     
   }
@@ -203,26 +210,74 @@ var months_arr = ['1','2','3','4','5','6','7','8','9','10','11','12'];
 }
 }
 
-// ----------------------------------------------------------------------//
-
-
 // This function pulls data from local storage
 function getValueFromLocalStorage(){
   var getData = JSON.parse(localStorage.getItem("cities"));
-
   if (getData !== null) {
     storedValues = getData;
-    var liEl = $("<li>");
-    liEl.addClass("list-group-item eachCity");
-    liEl.text(getData);
-    liEl.appendTo(".cityList");        
   }
+    renderCity();
 }
 
-// This function saves initial and score values to the local storage
+function addStoredValue (){
+    var storedCities = cityName.val().toUpperCase().trim();
+    if (storedCities === ""){
+      return;
+    }
+    storedValues.push(storedCities); 
+    cityName.val("");
+    storeValuesToLocalStorage();
+    //renderCity();
+} 
+
+// This function saves cities to the local storage
 function storeValuesToLocalStorage(){
-    localStorage.setItem("cities", JSON.stringify(storedValues));
+  localStorage.setItem("cities", JSON.stringify(storedValues));
 }
+
+
+
+function renderCity(){
+  // var cityList = $(".cityList");
+  // cityList.innerHTML = "";
+  for (var i = 0; i < storedValues.length; i++) {
+    var x = storedValues[i];
+    var liEl = $("<li>");
+    liEl.addClass("list-group-item eachCity");
+    liEl.text(x); 
+    liEl.appendTo(".cityList");  
+  } 
+}
+
+
+
+
+// ----------------------------------------------------------------------//
+
+// function renderCity(){
+//   for (var i = 0; i < storedValues.length; i++) {
+//     var x = storedValues[i];
+//     var liEl = $("<li>");
+//     liEl.addClass("list-group-item eachCity");
+//     liEl.text(x); 
+//     liEl.appendTo(".cityList");  
+//   } 
+// }
+
+
+// // This function pulls data from local storage
+// function getValueFromLocalStorage(){
+//   var getData = JSON.parse(localStorage.getItem("cities"));
+//   if (getData !== null) {
+//     storedValues = getData;
+//   }
+//     renderCity();
+// }
+
+// // This function saves initial and score values to the local storage
+// function storeValuesToLocalStorage(){
+//     localStorage.setItem("cities", JSON.stringify(storedValues));
+// }
 
 
 // This function gets the data from local storage
@@ -236,13 +291,13 @@ function storeValuesToLocalStorage(){
 
 
 // This function stores user input initial value and score to the local storage
-function addStoredValue (){
-    var storedCities = {
-    city: cityName.val().toUpperCase(),
-    };
-    storedValues.push(storedCities); 
-    storeValuesToLocalStorage();
-} 
+// function addStoredValue (){
+//     var storedCities = {
+//     city: cityName.val().toUpperCase(),
+//     };
+//     storedValues.push(storedCities); 
+//     storeValuesToLocalStorage();
+// } 
 
 
 
