@@ -192,10 +192,10 @@ $( document ).ready(function() {
   function renderCity(){
     $(".cityList").html('');
     for (var i = 0; i < storedValues.length; i++) {
-      var x = storedValues[i];
+      var newList = storedValues[i];
       var liEl = $("<li>");
       liEl.addClass("list-group-item eachCity");
-      liEl.text(x); 
+      liEl.text(newList); 
       liEl.appendTo(".cityList");  
     } 
   }
@@ -335,3 +335,8 @@ $( document ).ready(function() {
     }  
   });
 });
+
+
+function reloadPage() {
+  location.reload(true);
+}
