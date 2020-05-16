@@ -6,38 +6,31 @@
     
     <!-- Link Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+    
+    <!-- Link Font Awesome -->
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
       integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
       crossorigin="anonymous"
     />
-    
     <link rel="stylesheet" href="./style.css">
     <title>Weather Dashboard</title>
 </head>
 
 <body>
-
     <!-- Header Section -->
-
     <header class="topHeader">
         <h1>Weather Dashboard</h1>
     </header>
 
-
     <!-- Page Content -->
-
     <section class="container-m" >
-
         <div class="row ">
             <article class="col-sm-3 input-group d-inline cities">
                 <div>
                     <h5>Search for a city:</h5>
                     <div class="input-group searchCity ">
-                        <!-- <label for="citySearch">Search for a city:</label> -->
-                        
                         <input id="citySearch" type="text" class="form-control">
                         <div class="input-group-append ">
                             <button class="btn btn-primary searchBtn" type="button">
@@ -59,78 +52,60 @@
                     <p class="wind"></p>
                     <span class="uvlabel"></span>
                     <p class="uvindex"></p>
-            </div>
+                </div>
                 <div class="forecast">
                     <article class="col-12 cityForecast">
                        <h5 id="forecastHeading">5-Day Forecast:</h5>
                        <div class="row forecastRow">
+                            <article class="col-2 forecastDays">
+                                <div class="dayOne">
+                                    <h5 class="dateForecastOne"></h5>
+                                    <img class="weatherIconForecastOne">
+                                    <p class="tempForecastOne"></p>
+                                    <p class="humidityForecastOne"></p>
+                                </div>
+                            </article>
+                            
+                            <article class="col-2 forecastDays">
+                                <div class="dayTwo">
+                                    <h5 class="dateForecastTwo"></h5>
+                                    <img class="weatherIconForecastTwo">
+                                    <p class="tempForecastTwo"></p>
+                                    <p class="humidityForecastTwo"></p>
+                                </div>
+                            </article>
 
+                            <article class="col-2 forecastDays">
+                                <div class="dayThree">
+                                    <h5 class="dateForecastThree"></h5>
+                                    <img class="weatherIconForecastThree">
+                                    <p class="tempForecastThree"></p>
+                                    <p class="humidityForecastThree"></p>
+                                </div>
+                            </article>
 
-                        <article class="col-2 forecastDays">
-                            <div class="dayOne">
-                                <h5 class="dateForecastOne"></h5>
-                                <img class="weatherIconForecastOne">
-                                <p class="tempForecastOne"></p>
-                                <p class="humidityForecastOne"></p>
-                            </div>
-                        </article>
-                        
-                        <article class="col-2 forecastDays">
-                            <div class="dayTwo">
-                            <h5 class="dateForecastTwo"></h5>
-                            <img class="weatherIconForecastTwo">
-                        
-                            <p class="tempForecastTwo"></p>
-                            <p class="humidityForecastTwo"></p>
-                        </div>
-                        </article>
+                            <article class="col-2 forecastDays">
+                                <div class="dayFour">
+                                    <h5 class="dateForecastFour"></h5>
+                                    <img class="weatherIconForecastFour">
+                                    <p class="tempForecastFour"></p>
+                                    <p class="humidityForecastFour"></p>
+                                </div>
+                            </article>
 
-                        <article class="col-2 forecastDays">
-                            <div class="dayThree">
-                            <h5 class="dateForecastThree"></h5>
-                            <img class="weatherIconForecastThree">
-                        
-                            <p class="tempForecastThree"></p>
-                            <p class="humidityForecastThree"></p>
-                        </div>
-                        </article>
-
-                        <article class="col-2 forecastDays">
-                            <div class="dayFour">
-                            <h5 class="dateForecastFour"></h5>
-                            <img class="weatherIconForecastFour">
-                        
-                            <p class="tempForecastFour"></p>
-                            <p class="humidityForecastFour"></p>
-                        </div>
-                        </article>
-
-                        <article class="col-2 forecastDays">
-                            <div class="dayFive">
-                            <h5 class="dateForecastFive"></h5>
-                            <img class="weatherIconForecastFive">
-                        
-                            <p class="tempForecastFive"></p>
-                            <p class="humidityForecastFive"></p>
-                        </div>
-                        </article>
-                        
+                            <article class="col-2 forecastDays">
+                                <div class="dayFive">
+                                    <h5 class="dateForecastFive"></h5>
+                                    <img class="weatherIconForecastFive">
+                                    <p class="tempForecastFive"></p>
+                                    <p class="humidityForecastFive"></p>
+                                </div>
+                            </article>
                       </div>
-                    </article>
-                    
-                  </div>
-                
-             </article>
-
-             
-        </div>
-
-
-        
-            
-
-           
-        
+                    </article>  
+                </div>
+             </article>  
+        </div>    
     </section>
 
 
@@ -141,10 +116,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script> -->
 
     <script src="./script.js"></script>
-   
-    
+
 </body>
 </html>
