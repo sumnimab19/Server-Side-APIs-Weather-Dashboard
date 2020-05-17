@@ -145,3 +145,11 @@ body {
         text-align: center;
     }
   } 
+
+  @media (max-width: 414px) {
+    #enterCity {
+        padding-left: 10px;
+    }
+  } 
+
+  

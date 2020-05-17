@@ -207,7 +207,6 @@ $( document ).ready(function() {
   
   cityClicked.on("click", function(event){
     event.preventDefault()
-   // $(".cityList").load(location.href + " .cityList");
     // Grabbing and storing the clicked city value from the list of cities
     var clickedCity = $(this).text();
         
@@ -341,13 +340,27 @@ $( document ).ready(function() {
 
 // ***********************************************************************
 // Default City Display
-
-function displayDefaultCity(){  
-  var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=tucson&appid=" + APIKey;
+function displayDefaultCity(){ 
+  var queryURL; 
+  var defaultCity = ["tucson"];
+  var latitude;
+  var longitude;
+  console.log(storedValues)
+  if(storedValues.length === 0){
+    queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + defaultCity + "&appid=" + APIKey;
+  } else {
+    var lastCitySearched = storedValues[0];
+    queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + lastCitySearched + "&appid=" + APIKey;
+  }
   $.ajax({
     url: queryURL,
     method: "GET" 
   }).then(function(response) {  
+    console.log(response)
+    latitude = response.coord.lat;
+    longitude = response.coord.lon;
+
+
     var timeStamp = response.dt;
     // Convert timestamp to milliseconds
     var date = new Date(timeStamp*1000);
@@ -380,8 +393,13 @@ function displayDefaultCity(){
     var tempF = (response.main.temp - 273.15) * 1.80 + 32;
     $(".temp").text("Temparature: " + tempF.toFixed(2) + "°F");
 
-    
-    var queryURLForecast = "https://api.openweathermap.org/data/2.5/onecall?lat=32.253&lon=-110.911&exclude=hourly&appid=" + APIKey;
+    if(storedValues.length === 0){
+      defaultLatitude = 32.253;
+      defaultLongitude = -110.911;
+      var queryURLForecast = "https://api.openweathermap.org/data/2.5/onecall?lat=" + defaultLatitude + "&lon=" + defaultLongitude + "&exclude=hourly&appid=" + APIKey;
+    } else {
+      var queryURLForecast = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=hourly&appid=" + APIKey;
+    }
 
     $.ajax({
       url: queryURLForecast,
@@ -419,9 +437,34 @@ function displayDefaultCity(){
   getUVIndex();  
 
   function getUVIndex(){
+    var queryURL; 
+    var defaultCity = ["tucson"];
+    var latitude;
+    var longitude;
+    if(storedValues.length === 0){
+      latitude = 32.253;
+      longitude = -110.911;
+      queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + defaultCity + "&appid=" + APIKey;
+    } else {
+      var lastCitySearched = storedValues[0];
+      queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + lastCitySearched + "&appid=" + APIKey;
+    }
+
+      $.ajax({
+        url: queryURL,
+        method: "GET" 
+      }).then(function(response) {
+          var latValue = response.coord.lat;      
+          var lonValue = response.coord.lon;
 
         // UV Index ajax call
-        var queryURLUV = "https://api.openweathermap.org/data/2.5/uvi?appid=" + APIKey + "&lat=32.253&lon=-110.911";
+        if (storedValues === null){
+          latValue = 32.253;
+          lonValue = -110.911;
+          var queryURLUV = "https://api.openweathermap.org/data/2.5/uvi?appid=" + APIKey + "&lat=" + latValue + "&lon=" + lonValue;
+        } else{
+          var queryURLUV = "https://api.openweathermap.org/data/2.5/uvi?appid=" + APIKey + "&lat=" + latValue + "&lon=" + lonValue;
+        }
           
         $.ajax({
           url: queryURLUV,
@@ -447,11 +490,9 @@ function displayDefaultCity(){
             $(".uvindex").addClass("extremeUV");
           }
         });
+      });
   }
-
-
   }
-
 });
 
 
