@@ -22,12 +22,11 @@ THEN USERS are presented with current and future conditions for that city and th
 WHEN USERS view current weather conditions for that city
 THEN USERS are presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index
 WHEN USERS view the UV index
-THEN USERS are presented with a color that indicates whether the conditions are favorable, moderate, or severe
-WHEN USERS view future weather conditions for that city
+THEN USERS are presented with a color that indicates whether the conditions are favorable, moderate, or severe. UV Index color code:
 
-UV Index color code:
 <img width="425" alt="Screen Shot 2020-05-16 at 10 25 43 PM" src="https://user-images.githubusercontent.com/55207625/82136690-141cba80-97c5-11ea-9536-fd797be84c3d.png">
 
+WHEN USERS view future weather conditions for that city
 THEN USERS are presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, and the humidity
 WHEN USERS click on a city in the search history
 THEN USERS are again presented with current and future conditions for that city
