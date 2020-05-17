@@ -5,7 +5,7 @@ This is a Weather Dashboard application that uses third-party API and will run i
 
 ## Description
 
-This application uses the [OpenWeather API](https://openweathermap.org/api) to retrieve weather data for cities. This helps users see the weather outlook for multiple cities so that they can plan a trip accordingly. It uses `localStorage` to store weather data for the cities user has searched. It uses several AJAX calls to get the JSON data for the city, from openweathermap API, that was searched and it displays the weather data on the page. 
+This application uses the [OpenWeather API](https://openweathermap.org/api) to retrieve weather data for cities. This helps users see the weather outlook for multiple cities so that they can plan a trip accordingly. It uses `localStorage` to store weather data for the cities user has searched. It uses several AJAX calls to get the JSON data for the city, from openweathermap API, that was searched and it displays the weather data on the page. By Default, it displays 'Tucson' weather if local storage is empty else, it displays the last searched city.
 
 
 ## Use Cases

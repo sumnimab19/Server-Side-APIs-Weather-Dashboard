@@ -197,10 +197,12 @@ $( document ).ready(function() {
       liEl.text(newList); 
       liEl.appendTo(".cityList");  
     } 
+    clickList();
   }
 
 // -------------------***********************---------------------***********************-----------------
 
+function clickList(){
 // Added event listener to li elements (City List that are saved in Local Storage from above)
   var cityClicked = $(".eachCity");
   cityClicked.css('cursor', 'pointer'); 
@@ -337,7 +339,7 @@ $( document ).ready(function() {
       });
     }  
   });
-
+}
 // ***********************************************************************
 // Default City Display
 function displayDefaultCity(){ 
@@ -349,7 +351,7 @@ function displayDefaultCity(){
   if(storedValues.length === 0){
     queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + defaultCity + "&appid=" + APIKey;
   } else {
-    var lastCitySearched = storedValues[0];
+    var lastCitySearched = storedValues[storedValues.length - 1];
     queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + lastCitySearched + "&appid=" + APIKey;
   }
   $.ajax({
@@ -446,7 +448,7 @@ function displayDefaultCity(){
       longitude = -110.911;
       queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + defaultCity + "&appid=" + APIKey;
     } else {
-      var lastCitySearched = storedValues[0];
+      var lastCitySearched = storedValues[storedValues.length - 1];
       queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + lastCitySearched + "&appid=" + APIKey;
     }
 
@@ -496,6 +498,6 @@ function displayDefaultCity(){
 });
 
 
-// function reloadPage() {
-//   location.reload(true);
-// }
+function reloadPage() {
+  location.reload(true);
+}
