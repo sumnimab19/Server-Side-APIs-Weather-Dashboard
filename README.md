@@ -6,8 +6,7 @@ This is a Weather Dashboard application that uses third-party API and will run i
 ## Description
 
 This application uses the [OpenWeather API](https://openweathermap.org/api) to retrieve weather data for cities. This helps users see the weather outlook for multiple cities so that they can plan a trip accordingly. It uses `localStorage` to store weather data for the cities user has searched. It uses several AJAX calls to get the JSON data for the city, from openweathermap API, that was searched and it displays the weather data on the page. By Default, it displays 'Tucson' weather if local storage is empty else, it displays the last searched city's weather. 
-UV Index color code:
-<img width="425" alt="Screen Shot 2020-05-16 at 10 25 43 PM" src="https://user-images.githubusercontent.com/55207625/82136690-141cba80-97c5-11ea-9536-fd797be84c3d.png">
+
 
 
 ## Use Cases
@@ -25,6 +24,10 @@ THEN USERS are presented with the city name, the date, an icon representation of
 WHEN USERS view the UV index
 THEN USERS are presented with a color that indicates whether the conditions are favorable, moderate, or severe
 WHEN USERS view future weather conditions for that city
+
+UV Index color code:
+<img width="425" alt="Screen Shot 2020-05-16 at 10 25 43 PM" src="https://user-images.githubusercontent.com/55207625/82136690-141cba80-97c5-11ea-9536-fd797be84c3d.png">
+
 THEN USERS are presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, and the humidity
 WHEN USERS click on a city in the search history
 THEN USERS are again presented with current and future conditions for that city
