@@ -347,7 +347,6 @@ function displayDefaultCity(){
   var defaultCity = ["tucson"];
   var latitude;
   var longitude;
-  console.log(storedValues)
   if(storedValues.length === 0){
     queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + defaultCity + "&appid=" + APIKey;
   } else {
@@ -358,7 +357,6 @@ function displayDefaultCity(){
     url: queryURL,
     method: "GET" 
   }).then(function(response) {  
-    console.log(response)
     latitude = response.coord.lat;
     longitude = response.coord.lon;
 
