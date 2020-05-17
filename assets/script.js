@@ -23,7 +23,7 @@ $( document ).ready(function() {
       url: queryURL,
       method: "GET" 
     }).then(function(response) {
-    
+     
       latValue = response.coord.lat;
       lonValue = response.coord.lon;
       
@@ -82,13 +82,13 @@ $( document ).ready(function() {
             method: "GET" 
           }).then(function(response) {
             // Arrays to hold classes 
-            var dateForecastArray = ["dateForecastOne","dateForecastTwo","dateForecastThree","dateForecastFour","dateForecastFive"];
-            var weatherIconForecastArray = ["weatherIconForecastOne","weatherIconForecastTwo","weatherIconForecastThree","weatherIconForecastFour","weatherIconForecastFive"];
-            var tempForecastArray = ["tempForecastOne","tempForecastTwo","tempForecastThree", "tempForecastFour","tempForecastFive"];
-            var humidityForecastArray = ["humidityForecastOne","humidityForecastTwo","humidityForecastThree","humidityForecastFour","humidityForecastFive"];
+            var dateForecastArray = ["dateForecastZero","dateForecastOne","dateForecastTwo","dateForecastThree","dateForecastFour","dateForecastFive"];
+            var weatherIconForecastArray = ["weatherIconForecastZero","weatherIconForecastOne","weatherIconForecastTwo","weatherIconForecastThree","weatherIconForecastFour","weatherIconForecastFive"];
+            var tempForecastArray = ["tempForecastZero","tempForecastOne","tempForecastTwo","tempForecastThree", "tempForecastFour","tempForecastFive"];
+            var humidityForecastArray = ["humidityForecastZero","humidityForecastOne","humidityForecastTwo","humidityForecastThree","humidityForecastFour","humidityForecastFive"];
             
-            // For Look gives 5 days data for forecast from the list of 16 days array
-            for (var i = 0; i < 5; i++) {   
+            // For Loop gives 5 days data for forecast from the list of 16 days array
+            for (var i = 1; i < 6; i++) {   
                 var timeStamp = (response.daily[i].dt);
                 var date = new Date(timeStamp*1000);
                 var months_arr = ['1','2','3','4','5','6','7','8','9','10','11','12'];
@@ -268,12 +268,12 @@ function clickList(){
         url: queryURLForecast,
         method: "GET" 
       }).then(function(response) {
-        var dateForecastArray = ["dateForecastOne","dateForecastTwo","dateForecastThree","dateForecastFour","dateForecastFive"];
-        var weatherIconForecastArray = ["weatherIconForecastOne","weatherIconForecastTwo","weatherIconForecastThree","weatherIconForecastFour","weatherIconForecastFive"];
-        var tempForecastArray = ["tempForecastOne","tempForecastTwo","tempForecastThree", "tempForecastFour","tempForecastFive"];
-        var humidityForecastArray = ["humidityForecastOne","humidityForecastTwo","humidityForecastThree","humidityForecastFour","humidityForecastFive"];
+        var dateForecastArray = ["dateForecastZero","dateForecastOne","dateForecastTwo","dateForecastThree","dateForecastFour","dateForecastFive"];
+        var weatherIconForecastArray = ["weatherIconForecastZero","weatherIconForecastOne","weatherIconForecastTwo","weatherIconForecastThree","weatherIconForecastFour","weatherIconForecastFive"];
+        var tempForecastArray = ["tempForecastZero","tempForecastOne","tempForecastTwo","tempForecastThree", "tempForecastFour","tempForecastFive"];
+        var humidityForecastArray = ["humidityForecastZero","humidityForecastOne","humidityForecastTwo","humidityForecastThree","humidityForecastFour","humidityForecastFive"];
             
-        for (var i = 0; i < 5; i++) {  
+        for (var i = 1; i < 6; i++) {  
           var timeStamp = (response.daily[i].dt);
           var date = new Date(timeStamp*1000);
           var months_arr = ['1','2','3','4','5','6','7','8','9','10','11','12'];
@@ -405,12 +405,12 @@ function displayDefaultCity(){
       url: queryURLForecast,
       method: "GET" 
     }).then(function(response) {
-      var dateForecastArray = ["dateForecastOne","dateForecastTwo","dateForecastThree","dateForecastFour","dateForecastFive"];
-      var weatherIconForecastArray = ["weatherIconForecastOne","weatherIconForecastTwo","weatherIconForecastThree","weatherIconForecastFour","weatherIconForecastFive"];
-      var tempForecastArray = ["tempForecastOne","tempForecastTwo","tempForecastThree", "tempForecastFour","tempForecastFive"];
-      var humidityForecastArray = ["humidityForecastOne","humidityForecastTwo","humidityForecastThree","humidityForecastFour","humidityForecastFive"];
+      var dateForecastArray = ["dateForecastZero","dateForecastOne","dateForecastTwo","dateForecastThree","dateForecastFour","dateForecastFive"];
+      var weatherIconForecastArray = ["weatherIconForecastZero","weatherIconForecastOne","weatherIconForecastTwo","weatherIconForecastThree","weatherIconForecastFour","weatherIconForecastFive"];
+      var tempForecastArray = ["tempForecastZero","tempForecastOne","tempForecastTwo","tempForecastThree", "tempForecastFour","tempForecastFive"];
+      var humidityForecastArray = ["humidityForecastZero","humidityForecastOne","humidityForecastTwo","humidityForecastThree","humidityForecastFour","humidityForecastFive"];
           
-      for (var i = 0; i < 5; i++) {  
+      for (var i = 1; i < 6; i++) {  
         var timeStamp = (response.daily[i].dt);
         var date = new Date(timeStamp*1000);
         var months_arr = ['1','2','3','4','5','6','7','8','9','10','11','12'];
