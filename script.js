@@ -497,7 +497,3 @@ function displayDefaultCity(){
   }
 });
 
-
-function reloadPage() {
-  location.reload(true);
-}

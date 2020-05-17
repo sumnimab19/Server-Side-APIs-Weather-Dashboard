@@ -5,12 +5,15 @@ This is a Weather Dashboard application that uses third-party API and will run i
 
 ## Description
 
-This application uses the [OpenWeather API](https://openweathermap.org/api) to retrieve weather data for cities. This helps users see the weather outlook for multiple cities so that they can plan a trip accordingly. It uses `localStorage` to store weather data for the cities user has searched. It uses several AJAX calls to get the JSON data for the city, from openweathermap API, that was searched and it displays the weather data on the page. By Default, it displays 'Tucson' weather if local storage is empty else, it displays the last searched city.
+This application uses the [OpenWeather API](https://openweathermap.org/api) to retrieve weather data for cities. This helps users see the weather outlook for multiple cities so that they can plan a trip accordingly. It uses `localStorage` to store weather data for the cities user has searched. It uses several AJAX calls to get the JSON data for the city, from openweathermap API, that was searched and it displays the weather data on the page. By Default, it displays 'Tucson' weather if local storage is empty else, it displays the last searched city's weather. 
+UV Index color code:
+<img width="425" alt="Screen Shot 2020-05-16 at 10 25 43 PM" src="https://user-images.githubusercontent.com/55207625/82136690-141cba80-97c5-11ea-9536-fd797be84c3d.png">
 
 
 ## Use Cases
 
 AS A traveler
+
 USERS WANT to see the weather outlook for multiple cities
 SO THAT they can plan a trip accordingly
 
@@ -38,14 +41,14 @@ THEN USERS are presented with the last searched city forecast
 7. Openweathermap API
 
 
-## Screenshots
+## Screenshot Large Screen
+
+<img width="1251" alt="Screen Shot 2020-05-16 at 10 33 36 PM" src="https://user-images.githubusercontent.com/55207625/82136766-c81e4580-97c5-11ea-844a-b83711ea50cc.png">
 
 
+## Screenshot Small Screen
 
-
-## GIFs
-
-
+<img width="289" alt="Screen Shot 2020-05-16 at 10 36 51 PM" src="https://user-images.githubusercontent.com/55207625/82136782-f13ed600-97c5-11ea-9a0a-a2650887883c.png">
 
 
 
