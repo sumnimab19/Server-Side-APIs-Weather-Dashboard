@@ -94,7 +94,7 @@ body {
     font-weight: bold;
 }
 
-
+/* Media queries for different screen size */
 @media (max-width: 768px) {
     .dateForecastOne  {
       font-size: 1.0rem;
