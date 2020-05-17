@@ -15,7 +15,6 @@ $( document ).ready(function() {
   // This function has several ajax calls to pull data from openweathermap api
   function getData(){  
   if(cityName !== null){
-
     var searchedCity = $("#citySearch").val().trim();
     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + searchedCity + "&appid=" + APIKey;
 
@@ -115,7 +114,6 @@ $( document ).ready(function() {
       getUVIndex();  
       addStoredValue();
       getValueFromLocalStorage();
-
   } 
 
   // This function gives UV Index and add classes which is then used to format the color of that field based on it's value.
@@ -200,97 +198,102 @@ $( document ).ready(function() {
     } 
   }
 
+// -------------------***********************---------------------***********************-----------------
 
 // Added event listener to li elements (City List that are saved in Local Storage from above)
   var cityClicked = $(".eachCity");
-  cityClicked.on("click", function(){
+  cityClicked.css('cursor', 'pointer'); 
+  
+  cityClicked.on("click", function(event){
+    event.preventDefault()
     $(".cityList").load(location.href + " .cityList");
-        // Grabbing and storing the clicked city value from the list of cities
-        var clickedCity = $(this).text();
-        var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + clickedCity + "&appid=" + APIKey;
-
-        $.ajax({
-          url: queryURL,
-          method: "GET" 
-        }).then(function(response) {
-          latValue = response.coord.lat;
-          lonValue = response.coord.lon;
-          
-          var timeStamp = response.dt;
-          // Convert timestamp to milliseconds
-          var date = new Date(timeStamp*1000);
-      
-          // Months array
-          var months_arr = ['1','2','3','4','5','6','7','8','9','10','11','12'];
-          // Year
-          var year = date.getFullYear();
-          // Month
-          var month = months_arr[date.getMonth()];
-          // Day
-          var day = date.getDate();
-          // Display date time in MM-dd-yyyy h:m:s format
-          var convertedDate = month+'/'+day+'/'+year;
-
-          $(".city").html(response.name + "  (" + convertedDate + ")");
-          $(".city").css("font-weight","Bold");
-          var iconNum = response.weather[0].icon;
+    // Grabbing and storing the clicked city value from the list of cities
+    var clickedCity = $(this).text();
         
-          var iconURL = "http://openweathermap.org/img/wn/" + iconNum + "@2x.png";
-          $(".weatherIcon").attr("src",iconURL);
-          $('.weatherIcon').width(50); 
-          $('.weatherIcon').height(50);
-      
-          $(".wind").text("Wind: " + response.wind.speed + " MPH");
-          $(".humidity").text("Humidity: " + response.main.humidity + "%");
-          $(".uvindex").text("UV Index: ");
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + clickedCity + "&appid=" + APIKey;
+
+    $.ajax({
+      url: queryURL,
+      method: "GET" 
+    }).then(function(response) {
+      latValue = response.coord.lat;
+      lonValue = response.coord.lon;
           
-          // Convert the temp to fahrenheit
-          var tempF = (response.main.temp - 273.15) * 1.80 + 32;
-          $(".temp").text("Temparature: " + tempF.toFixed(2) + "°F");
-        });
+      var timeStamp = response.dt;
+      // Convert timestamp to milliseconds
+      var date = new Date(timeStamp*1000);
+      
+      // Months array
+      var months_arr = ['1','2','3','4','5','6','7','8','9','10','11','12'];
+      // Year
+      var year = date.getFullYear();
+      // Month
+      var month = months_arr[date.getMonth()];
+      // Day
+      var day = date.getDate();
+      // Display date time in MM-dd-yyyy h:m:s format
+      var convertedDate = month+'/'+day+'/'+year;
+
+      $(".city").html(response.name + "  (" + convertedDate + ")");
+      $(".city").css("font-weight","Bold");
+      var iconNum = response.weather[0].icon;
+        
+      var iconURL = "http://openweathermap.org/img/wn/" + iconNum + "@2x.png";
+      $(".weatherIcon").attr("src",iconURL);
+      $('.weatherIcon').width(50); 
+      $('.weatherIcon').height(50);
+      
+      $(".wind").text("Wind: " + response.wind.speed + " MPH");
+      $(".humidity").text("Humidity: " + response.main.humidity + "%");
+      $(".uvindex").text("UV Index: ");
+          
+      // Convert the temp to fahrenheit
+      var tempF = (response.main.temp - 273.15) * 1.80 + 32;
+      $(".temp").text("Temparature: " + tempF.toFixed(2) + "°F");
+    });
   
 
+    $.ajax({
+      url: queryURL,
+      method: "GET" 
+    }).then(function(response) {
+      latitude = response.coord.lat;
+      longitude = response.coord.lon;
+
+      var queryURLForecast = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=hourly&appid=" + APIKey;
+
       $.ajax({
-        url: queryURL,
+        url: queryURLForecast,
         method: "GET" 
       }).then(function(response) {
-          latitude = response.coord.lat;
-          longitude = response.coord.lon;
-
-          var queryURLForecast = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=hourly&appid=" + APIKey;
-
-          $.ajax({
-              url: queryURLForecast,
-              method: "GET" 
-            }).then(function(response) {
-              var dateForecastArray = ["dateForecastOne","dateForecastTwo","dateForecastThree","dateForecastFour","dateForecastFive"];
-              var weatherIconForecastArray = ["weatherIconForecastOne","weatherIconForecastTwo","weatherIconForecastThree","weatherIconForecastFour","weatherIconForecastFive"];
-              var tempForecastArray = ["tempForecastOne","tempForecastTwo","tempForecastThree", "tempForecastFour","tempForecastFive"];
-              var humidityForecastArray = ["humidityForecastOne","humidityForecastTwo","humidityForecastThree","humidityForecastFour","humidityForecastFive"];
+        var dateForecastArray = ["dateForecastOne","dateForecastTwo","dateForecastThree","dateForecastFour","dateForecastFive"];
+        var weatherIconForecastArray = ["weatherIconForecastOne","weatherIconForecastTwo","weatherIconForecastThree","weatherIconForecastFour","weatherIconForecastFive"];
+        var tempForecastArray = ["tempForecastOne","tempForecastTwo","tempForecastThree", "tempForecastFour","tempForecastFive"];
+        var humidityForecastArray = ["humidityForecastOne","humidityForecastTwo","humidityForecastThree","humidityForecastFour","humidityForecastFive"];
             
-              for (var i = 0; i < 5; i++) {  
-                  var timeStamp = (response.daily[i].dt);
-                  var date = new Date(timeStamp*1000);
-                  var months_arr = ['1','2','3','4','5','6','7','8','9','10','11','12'];
-                  var year = date.getFullYear();
-                  var month = months_arr[date.getMonth()];
-                  var day = date.getDate();
-                  var convertedDate = month+'/'+day+'/'+year;
-                  $("." + dateForecastArray[i]).text(convertedDate);
+        for (var i = 0; i < 5; i++) {  
+          var timeStamp = (response.daily[i].dt);
+          var date = new Date(timeStamp*1000);
+          var months_arr = ['1','2','3','4','5','6','7','8','9','10','11','12'];
+          var year = date.getFullYear();
+          var month = months_arr[date.getMonth()];
+          var day = date.getDate();
+          var convertedDate = month+'/'+day+'/'+year;
+          $("." + dateForecastArray[i]).text(convertedDate);
           
-                  var iconNum = response.daily[i].weather[0].icon;
-                  var forecastURL = "http://openweathermap.org/img/wn/" + iconNum + "@2x.png";
-                  $("." + weatherIconForecastArray[i]).attr("src",forecastURL);
-                  $("." + weatherIconForecastArray[i]).width(50); 
-                  $("." + weatherIconForecastArray[i]).height(50);
+          var iconNum = response.daily[i].weather[0].icon;
+          var forecastURL = "http://openweathermap.org/img/wn/" + iconNum + "@2x.png";
+          $("." + weatherIconForecastArray[i]).attr("src",forecastURL);
+          $("." + weatherIconForecastArray[i]).width(50); 
+          $("." + weatherIconForecastArray[i]).height(50);
           
-                  var tempF = (response.daily[i].temp.day - 273.15) * 1.80 + 32;
-                  $("." + tempForecastArray[i]).text("Temp: " + tempF.toFixed(2) + " °F");
+          var tempF = (response.daily[i].temp.day - 273.15) * 1.80 + 32;
+          $("." + tempForecastArray[i]).text("Temp: " + tempF.toFixed(2) + " °F");
           
-                  $("." + humidityForecastArray[i]).text("Humidity: " + response.daily[i].humidity + "%");  
-              }
-            })
+          $("." + humidityForecastArray[i]).text("Humidity: " + response.daily[i].humidity + "%");  
+        }
       })
+    })
     
     getUVIndex();  
 
